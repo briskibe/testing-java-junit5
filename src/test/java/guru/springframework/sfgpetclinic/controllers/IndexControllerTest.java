@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class IndexControllerTest {
 
@@ -34,7 +35,7 @@ class IndexControllerTest {
 
     // assertTimeout vs assertTimeoutPreemptively: assertTimeout waits for the code to finish, then checks the result. assertTimeoutPreemptively interrupts the code after the timeout is reached.
     @Test
-    //@Disabled("Demo of timeout")
+    @Disabled("Demo of timeout")
     void testTimeOut() {
         assertTimeout(Duration.ofMillis(100), () -> {
             Thread.sleep(5000);
@@ -44,12 +45,23 @@ class IndexControllerTest {
     }
 
     @Test
-    //@Disabled("Demo of timeout")
+    @Disabled("Demo of timeout")
     void testTimeOutPrempt() {
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
             Thread.sleep(5000);
 
             System.out.println("I got here 342423423432");
         });
+    }
+
+    // assumptions are used when there is some case when something is missing in some environment, and the test should be skipped in that case
+    @Test
+    void testAssumptionTrue() {
+        assumeTrue("GURU".equalsIgnoreCase(System.getenv("GURU_RUNTIME")));
+    }
+
+    @Test
+    void testAssumptionTrueAssumptionIsTrue() {
+        assumeTrue("GURU".equalsIgnoreCase("GURU"));
     }
 }
