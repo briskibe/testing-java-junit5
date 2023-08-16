@@ -29,7 +29,6 @@ class PersonTest implements ModelTests {
                 () -> assertEquals("Buck", person.getLastName(), () -> "Last Name Failed"));
     }
 
-    @Test
     @RepeatedTest(value = 10, name = "{displayName} : {currentRepetition} - {totalRepetitions}")
     @DisplayName("My Repeated Test")
     void myRepeatedTest() {
